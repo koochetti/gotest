@@ -11,7 +11,7 @@ pipeline{
 			steps{
 				sh """
 					export PATH=$PATH:/goroot/bin:/gopath/bin
-					docker build -t mygo .
+					docker build -t koochetti/mygo .
 				"""
 			}
 		}
@@ -21,7 +21,7 @@ pipeline{
 			{
 				sh """
 					docker login --username $USER --password $PASSWORD
-					docker push mygo
+					docker push koochetti/mygo
 				"""
 			}
 		
