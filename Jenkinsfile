@@ -4,10 +4,7 @@ pipeline{
 	{
 		stage("build"){
 			steps{
-				sh """
-				export PATH=$PATH:/goroot/bin:/gopath/bin
-				go build main.go
-				"""
+				sh """go build main.go"""
 			}
 		}
 		stage("docker build"){
@@ -15,9 +12,16 @@ pipeline{
 				sh """docker build -t mygo ."""
 			}
 		}
-		stage("push"){
+		stage("push to DTR"){
 			steps{
-				echo "push"		
+			withCredentials([usernamePassword(credentialsId: 'dp', usernameVariable: 'USER', passwordVariable: 'PASSWORD')])
+			{
+				sh """
+					docker login --username $USER --password $PASSWORD
+					docker push mygo
+				"""
+			}
+		
 		}
 		}
 	}
