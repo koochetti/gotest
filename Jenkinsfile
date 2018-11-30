@@ -4,7 +4,10 @@ pipeline{
 	{
 		stage("build"){
 			steps{
-				sh """go build main.go"""
+				sh """
+				export PATH=$PATH:/goroot/bin:/gopath/bin
+				go build main.go
+				"""
 			}
 		}
 		stage("docker build"){
