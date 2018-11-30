@@ -9,7 +9,10 @@ pipeline{
 		}
 		stage("docker build"){
 			steps{
-				sh """docker build -t mygo ."""
+				sh """
+					EXPORT PATH=$PATH:/goroot/bin:/gopath/bin
+					docker build -t mygo .
+				"""
 			}
 		}
 		stage("push to DTR"){
