@@ -1,4 +1,5 @@
-FROM golang
-COPY . /go/src
-EXPOSE 8081
+FROM golang:latest
+ADD main /
+WORKDIR /
+CMD  /main
 
